@@ -6,9 +6,9 @@ import Icon from 'react-native-vector-icons/Ionicons'
 
 const Wrapper = styled.View`
   width: 100%;
-  height: 100px;
-  background: ${p => p.theme.palette.primary.background};
-  color: ${p => p.theme.palette.primary.contrastText};
+  height: ${p => p.theme.sizes.offsetMargin * 2.5};
+  background: ${p => p.theme.palette.background.main};
+  color: ${p => p.theme.palette.background.contrastText};
 
   display: flex;
   flex-direction: row;
@@ -19,7 +19,7 @@ const Title = styled.Text`
   font-size: 25;
   font-weight: 500;
   font-family: ${p => p.theme.fonts.header};
-  margin-left: ${p => p.theme.sizes.secondRow};
+  margin-left: ${p => p.theme.sizes.offsetMargin};
 `
 
 const StyledIcon = styled(Icon)``
@@ -35,8 +35,15 @@ const Header = ({ navigation, children }) => (
       {navigation.state.routeName === 'LibraryScreen' && (
         <StyledIcon
           name="ios-arrow-back"
+          size={18}
+          onPress={() => navigation.navigate('HomeScreen')}
+        />
+      )}
+      {navigation.state.routeName === 'PlaylistScreen' && (
+        <StyledIcon
+          name="ios-arrow-back"
           size={20}
-          onPress={navigation.goBack}
+          onPress={() => navigation.navigate('LibraryScreen')}
         />
       )}
 
