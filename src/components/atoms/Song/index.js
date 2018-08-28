@@ -75,7 +75,7 @@ const Song = ({ song: { title, artist, img, active }, ...rest }) => (
         <Title>{title}</Title>
         <Artist>{artist}</Artist>
       </Description>
-      <Icon style={{ alignSelf: 'flex-end' }} name="ios-more" />
+      <Icon style={{ alignSelf: 'center' }} size={20} name="ios-more" />
     </Actions>
   </Body>
 )

@@ -8,6 +8,7 @@ const Container = styled.View`
   margin: 0 ${p => p.theme.sizes.offsetMargin + 'px'};
   flex-direction: row;
   align-items: center;
+  flex: 1;
 `
 
 export default Container

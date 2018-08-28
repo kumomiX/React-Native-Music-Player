@@ -22,7 +22,11 @@ const Title = styled.Text`
   margin-left: ${p => p.theme.sizes.offsetMargin};
 `
 
-const StyledIcon = styled(Icon)``
+const Action = styled(Icon)`
+  margin-left: auto;
+  /* align-self: flex-end; */
+  /* margin-top: auto; */
+`
 
 /**
  * App header
@@ -33,14 +37,14 @@ const Header = ({ navigation, children }) => (
   <Wrapper>
     <Container>
       {navigation.state.routeName === 'LibraryScreen' && (
-        <StyledIcon
+        <Icon
           name="ios-arrow-back"
           size={18}
           onPress={() => navigation.navigate('HomeScreen')}
         />
       )}
       {navigation.state.routeName === 'PlaylistScreen' && (
-        <StyledIcon
+        <Icon
           name="ios-arrow-back"
           size={20}
           onPress={() => navigation.navigate('LibraryScreen')}
@@ -48,6 +52,9 @@ const Header = ({ navigation, children }) => (
       )}
 
       <Title>{children}</Title>
+      {/* <Action> */}
+      <Action name="ios-more" size={20} />
+      {/* </Action> */}
     </Container>
   </Wrapper>
 )
