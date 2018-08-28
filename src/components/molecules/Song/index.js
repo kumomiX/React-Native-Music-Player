@@ -1,8 +1,11 @@
+// @flow
 import React from 'react'
 import styled, { css } from 'styled-components'
 import { Text, Image } from 'react-native'
 import Icon from 'react-native-vector-icons/Ionicons'
-import Container from '../Containter'
+
+import type { Props } from './types'
+import Container from '../../atoms/Container'
 
 const SIDE_SIZE = 38
 
@@ -32,7 +35,6 @@ const Cover = styled.Image`
 
 const Actions = styled.View`
   height: ${SIDE_SIZE};
-
   flex-direction: row;
   justify-content: space-between;
   flex: 1;
@@ -43,6 +45,14 @@ const Actions = styled.View`
 const Description = styled.View`
   height: 100%;
   justify-content: space-between;
+`
+
+const Artist = styled.Text`
+  font-family: 'Futura New';
+  font-weight: 200;
+  font-size: 18;
+  line-height: 16;
+  color: ${p => p.theme.palette.greyscale['light']};
 `
 
 const Title = styled.Text`
@@ -56,15 +66,11 @@ const Title = styled.Text`
       : p.theme.palette.background.contrastText};
 `
 
-const Artist = styled.Text`
-  font-family: 'Futura New';
-  font-weight: 200;
-  font-size: 18;
-  line-height: 16;
-  color: ${p => p.theme.palette.greyscale['light']};
-`
-
-const Song = ({ song: { title, artist, img, active }, ...rest }) => (
+/**
+ * General song component
+ * @param {*} song - song info
+ */
+const Song = ({ song: { title, artist, img, active }, ...rest }: Props) => (
   <Body {...rest}>
     <CoverWrapper active={active}>
       <Cover source={img} />

@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { Text } from 'react-native'
-import Container from '../../atoms/Containter'
+import Container from '../../atoms/Container'
 import Icon from 'react-native-vector-icons/Ionicons'
 
 const Wrapper = styled.View`
@@ -19,7 +19,7 @@ const Title = styled.Text`
   font-size: 25;
   font-weight: 500;
   font-family: ${p => p.theme.fonts.header};
-  margin-left: ${p => p.theme.sizes.offsetMargin};
+  margin-left: ${p => p.theme.sizes.offsetMargin + 15};
 `
 
 const Action = styled(Icon)`
@@ -35,7 +35,7 @@ const Action = styled(Icon)`
  */
 const Header = ({ navigation, children }) => (
   <Wrapper>
-    <Container>
+    <Container style={{ alignItems: 'center' }}>
       {navigation.state.routeName === 'LibraryScreen' && (
         <Icon
           name="ios-arrow-back"

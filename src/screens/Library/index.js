@@ -4,8 +4,9 @@ import styled, { withTheme } from 'styled-components'
 
 import Header from '../../components/molecules/Header'
 import SongsList from '../../components/molecules/SongsList'
-import Song from '../../components/atoms/Song'
-import Container from '../../components/atoms/Containter'
+import Song from '../../components/molecules/Song'
+
+import songs from '../../songs'
 
 import type { Props } from './types'
 
@@ -14,28 +15,6 @@ const Screen = styled.View`
   background: ${p => p.theme.palette.background.main};
   color: ${p => p.theme.palette.background.contrastText};
 `
-
-const songs = [
-  {
-    artist: 'Boy Harsher',
-    title: 'Pain',
-    id: 0,
-    img: require('../../pain.jpg'),
-  },
-  {
-    artist: 'Noname',
-    title: 'Diddy Bop',
-    id: 1,
-    img: require('../../diddybop.jpeg'),
-    active: true,
-  },
-  {
-    artist: 'Crystal Castles',
-    title: 'Kept',
-    id: 2,
-    img: require('../../kept.jpg'),
-  },
-]
 
 class LibraryScreen extends React.Component<Props> {
   static navigationOptions = ({ navigation }: Props) => {

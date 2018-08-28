@@ -6,7 +6,7 @@ export default {
     },
     primary: {
       100: 'rgba(233, 241, 244, 1)',
-      main: 'dodgerblue',
+      main: 'rgb(63, 75, 181)',
     },
     secondary: {},
     greyscale: {
@@ -15,7 +15,7 @@ export default {
   },
   sizes: {
     maxWidth: 75,
-    offsetMargin: 50,
+    offsetMargin: 35,
   },
   fonts: {
     header: 'Futura New',
