@@ -22,14 +22,21 @@ const Body = styled.View`
   position: relative;
 `
 
-const Info = styled.View`
+const Actions = styled.View`
   margin-top: 25;
   flex-direction: row;
   align-items: center;
   flex: 1;
+  height: 45;
 `
 
-const Button = styled(Icon)`
+const Info = styled.View`
+  flex-direction: row;
+  height: 55%;
+  align-items: center;
+`
+
+const PlayPause = styled(Icon)`
   color: ${p => p.theme.palette.background.main};
 `
 
@@ -55,18 +62,28 @@ const ExpandButton = styled(Icon)`
   color: ${p => p.theme.palette.background.main};
 `
 
-const NowPlaying = ({ children, song: { title, artist }, progress = 40 }) => (
+const NowPlaying = ({
+  children,
+  song: { title, artist },
+  isPlaying = true,
+  progress = 40,
+}) => (
   <Body>
     <ProgressBar progress={progress} />
     <Container style={{ alignItems: 'flex-start' }}>
-      <Info>
-        <Button name="ios-play" size={25} />
-        <Artist>Hucci</Artist>
-        <Title>Evil</Title>
-        <TouchableOpacity style={{ marginLeft: 'auto' }}>
-          <ExpandButton name="ios-arrow-dropup" size={40} />
+      <Actions>
+        <TouchableOpacity>
+          <PlayPause name={isPlaying ? 'ios-pause' : 'ios-play'} size={25} />
         </TouchableOpacity>
-      </Info>
+
+        <Info>
+          <Artist>{artist}</Artist>
+          <Title>{title}</Title>
+        </Info>
+        <TouchableOpacity style={{ marginLeft: 'auto' }}>
+          <ExpandButton name="ios-arrow-dropup" size={45} />
+        </TouchableOpacity>
+      </Actions>
     </Container>
   </Body>
 )

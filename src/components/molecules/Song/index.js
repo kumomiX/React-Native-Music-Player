@@ -6,8 +6,10 @@ import Icon from 'react-native-vector-icons/Ionicons'
 
 import type { Props } from './types'
 import Container from '../../atoms/Container'
+import ProgressBar from '../../atoms/ProgressBar'
 
 const SIDE_SIZE = 38
+const OFFSET_MULTIPLIER = 1
 
 const Body = styled.View`
   /* height: 80; */
@@ -22,8 +24,8 @@ const CoverWrapper = styled.View`
   ${p =>
     p.active &&
     css`
-      padding-top: ${p => p.theme.sizes.offsetMargin * 0.5};
-      padding-bottom: ${p => p.theme.sizes.offsetMargin * 0.5};
+      padding-top: ${p => p.theme.sizes.offsetMargin * OFFSET_MULTIPLIER};
+      padding-bottom: ${p => p.theme.sizes.offsetMargin * OFFSET_MULTIPLIER};
       background: ${p => p.theme.palette.primary['100']};
     `};
 `
@@ -37,9 +39,10 @@ const Actions = styled.View`
   height: ${SIDE_SIZE};
   flex-direction: row;
   justify-content: space-between;
-  flex: 1;
+  /* flex: 1; */
   margin-right: ${p => p.theme.sizes.offsetMargin};
-  margin-top: ${p => (p.active ? p.theme.sizes.offsetMargin * 0.5 : 0)};
+  margin-top: ${p =>
+    p.active ? p.theme.sizes.offsetMargin * OFFSET_MULTIPLIER : 0};
 `
 
 const Description = styled.View`
@@ -52,7 +55,8 @@ const Artist = styled.Text`
   font-weight: 200;
   font-size: 18;
   line-height: 16;
-  color: ${p => p.theme.palette.greyscale['light']};
+  color: ${p =>
+    p.active ? p.theme.palette.primary.main : p.theme.palette.greyscale.light};
 `
 
 const Title = styled.Text`
@@ -62,27 +66,50 @@ const Title = styled.Text`
   line-height: 18;
   color: ${p =>
     p.active
-      ? p.theme.palette.primary['main']
+      ? p.theme.palette.primary.main
       : p.theme.palette.background.contrastText};
+`
+
+const RightSide = styled.View`
+  flex: 1;
+  position: relative;
+`
+
+const Filler = styled.View`
+  position: absolute;
+  background: ${p => p.theme.palette.primary['100']};
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: ${p => p.progress + '%'};
+  z-index: -1;
 `
 
 /**
  * General song component
  * @param {*} song - song info
  */
-const Song = ({ song: { title, artist, img, active }, ...rest }: Props) => (
+const Song = ({
+  song: { title, artist, img, active },
+  progress = 25,
+  ...rest
+}: Props) => (
   <Body {...rest}>
     <CoverWrapper active={active}>
       <Cover source={img} />
     </CoverWrapper>
 
-    <Actions active={active}>
-      <Description>
-        <Title>{title}</Title>
-        <Artist>{artist}</Artist>
-      </Description>
-      <Icon style={{ alignSelf: 'center' }} size={20} name="ios-more" />
-    </Actions>
+    <RightSide active={active}>
+      <Actions active={active}>
+        <Description>
+          <Title active={active}>{title}</Title>
+          <Artist active={active}>{artist}</Artist>
+        </Description>
+        <Icon style={{ alignSelf: 'center' }} size={20} name="ios-more" />
+      </Actions>
+      {active && <ProgressBar progress={progress} />}
+      {active && <Filler progress={progress} />}
+    </RightSide>
   </Body>
 )
 
