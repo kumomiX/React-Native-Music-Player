@@ -20,12 +20,12 @@ const Body = styled.View`
 
 const CoverWrapper = styled.View`
   padding-left: ${p => p.theme.sizes.offsetMargin};
-  padding-right: 20;
+  padding-right: ${p => p.theme.sizes.smallMargin};
   ${p =>
     p.active &&
     css`
       padding-top: ${p => p.theme.sizes.offsetMargin * OFFSET_MULTIPLIER};
-      padding-bottom: ${p => p.theme.sizes.offsetMargin * OFFSET_MULTIPLIER};
+      padding-bottom: ${p => p.theme.sizes.offsetMargin * 1.5};
       background: ${p => p.theme.palette.primary['100']};
     `};
 `

@@ -16,6 +16,7 @@ export default {
   sizes: {
     maxWidth: 75,
     offsetMargin: 35,
+    smallMargin: 20,
   },
   fonts: {
     header: 'Futura New',
