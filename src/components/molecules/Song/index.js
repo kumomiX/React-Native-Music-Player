@@ -7,6 +7,7 @@ import Icon from 'react-native-vector-icons/Ionicons'
 import type { Props } from './types'
 import Container from '../../atoms/Container'
 import ProgressBar from '../../atoms/ProgressBar'
+import MoreButton from '../../atoms/MoreButton'
 
 const SIDE_SIZE = 38
 const OFFSET_MULTIPLIER = 1
@@ -80,6 +81,7 @@ const Filler = styled.View`
   background: ${p => p.theme.palette.primary['100']};
   top: 0;
   left: 0;
+
   height: 100%;
   width: ${p => p.progress + '%'};
   z-index: -1;
@@ -91,7 +93,8 @@ const Filler = styled.View`
  */
 const Song = ({
   song: { title, artist, img, active },
-  progress = 25,
+  progress,
+  onChange,
   ...rest
 }: Props) => (
   <Body {...rest}>
@@ -105,9 +108,9 @@ const Song = ({
           <Title active={active}>{title}</Title>
           <Artist active={active}>{artist}</Artist>
         </Description>
-        <Icon style={{ alignSelf: 'center' }} size={20} name="ios-more" />
+        <MoreButton />
       </Actions>
-      {active && <ProgressBar progress={progress} />}
+      {active && <ProgressBar progress={progress} onChange={onChange} />}
       {active && <Filler progress={progress} />}
     </RightSide>
   </Body>

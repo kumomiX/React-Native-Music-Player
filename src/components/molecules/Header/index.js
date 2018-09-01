@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import { Text } from 'react-native'
 import Container from '../../atoms/Container'
 import Icon from 'react-native-vector-icons/Ionicons'
+import MoreButton from '../../atoms/MoreButton'
 
 const Wrapper = styled.View`
   width: 100%;
@@ -20,12 +21,6 @@ const Title = styled.Text`
   font-weight: 500;
   font-family: ${p => p.theme.fonts.header};
   margin-left: ${p => p.theme.sizes.offsetMargin + 15};
-`
-
-const Action = styled(Icon)`
-  margin-left: auto;
-  /* align-self: flex-end; */
-  /* margin-top: auto; */
 `
 
 /**
@@ -52,9 +47,8 @@ const Header = ({ navigation, children }) => (
       )}
 
       <Title>{children}</Title>
-      {/* <Action> */}
-      <Action name="ios-more" size={20} />
-      {/* </Action> */}
+
+      <MoreButton style={{ marginLeft: 'auto' }} />
     </Container>
   </Wrapper>
 )

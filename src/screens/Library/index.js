@@ -17,6 +17,10 @@ const Screen = styled.View`
 `
 
 class LibraryScreen extends React.Component<Props> {
+  state = {
+    progress: 0,
+  }
+
   static navigationOptions = ({ navigation }: Props) => {
     return {
       title: navigation.getParam('otherParam'),
@@ -24,13 +28,13 @@ class LibraryScreen extends React.Component<Props> {
     }
   }
 
+  onProgressChange = val => this.setState({ progress: val })
+
   render() {
     return (
       <Screen>
-        <SongsList
-          style={{ marginTop: this.props.theme.sizes.offsetMargin * 1.5 }}
-        >
-          {songs.map(song => (
+        <SongsList>
+          {songs.map((song, i) => (
             <Song
               key={song.id}
               song={song}
@@ -39,6 +43,12 @@ class LibraryScreen extends React.Component<Props> {
                   song,
                 })
               }
+              progress={this.state.progress}
+              onChange={this.onProgressChange}
+              style={{
+                marginTop:
+                  i === 0 ? this.props.theme.sizes.offsetMargin * 2 : 0,
+              }}
             />
           ))}
         </SongsList>

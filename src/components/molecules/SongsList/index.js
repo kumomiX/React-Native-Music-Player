@@ -1,8 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
 
-const List = styled.View`
+const List = styled.ScrollView`
   width: 100%;
 `
 
-export default ({ children, ...rest }) => <List {...rest}>{children}</List>
+export default ({ children, ...props }) => <List {...props}>{children}</List>
