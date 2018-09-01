@@ -92,9 +92,10 @@ const Filler = styled.View`
  * @param {*} song - song info
  */
 const Song = ({
-  song: { title, artist, img, active },
+  song: { title, artist, img },
   progress,
   onChange,
+  active,
   ...rest
 }: Props) => (
   <Body {...rest}>

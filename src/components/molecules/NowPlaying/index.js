@@ -4,7 +4,9 @@ import React from 'react'
 import styled from 'styled-components'
 import Icon from 'react-native-vector-icons/Ionicons'
 import Container from '../../atoms/Container'
+import ExpandButton from '../../atoms/ExpandButton'
 import { TouchableOpacity } from 'react-native'
+import type { Props } from './types'
 
 const ProgressBar = styled.View`
   position: absolute;
@@ -58,34 +60,35 @@ const Title = styled.Text`
   margin-left: 10;
 `
 
-const ExpandButton = styled(Icon)`
-  color: ${p => p.theme.palette.background.main};
-`
-
+/**
+ *  Bottom Now Playing Component
+ */
 const NowPlaying = ({
-  children,
-  song: { title, artist },
+  song,
   isPlaying = true,
-  progress = 40,
-}) => (
-  <Body>
-    <ProgressBar progress={progress} />
-    <Container style={{ alignItems: 'flex-start' }}>
-      <Actions>
-        <TouchableOpacity>
-          <PlayPause name={isPlaying ? 'ios-pause' : 'ios-play'} size={25} />
-        </TouchableOpacity>
+  progress,
+  onExpand,
+  ...rest
+}: Props) =>
+  song ? (
+    <Body {...rest}>
+      <ProgressBar progress={progress} />
+      <Container style={{ alignItems: 'flex-start' }}>
+        <Actions>
+          <TouchableOpacity>
+            <PlayPause name={isPlaying ? 'ios-pause' : 'ios-play'} size={25} />
+          </TouchableOpacity>
 
-        <Info>
-          <Artist>{artist}</Artist>
-          <Title>{title}</Title>
-        </Info>
-        <TouchableOpacity style={{ marginLeft: 'auto' }}>
-          <ExpandButton name="ios-arrow-dropup" size={45} />
-        </TouchableOpacity>
-      </Actions>
-    </Container>
-  </Body>
-)
+          <Info>
+            <Artist>{song.artist}</Artist>
+            <Title>{song.title}</Title>
+          </Info>
+          <ExpandButton style={{ marginLeft: 'auto' }} onPress={onExpand} />
+        </Actions>
+      </Container>
+    </Body>
+  ) : (
+    <React.Fragment />
+  )
 
 export default NowPlaying
