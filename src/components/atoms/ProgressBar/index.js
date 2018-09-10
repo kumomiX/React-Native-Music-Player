@@ -22,7 +22,7 @@ const Progress = styled(Slider).attrs({
     height: THUMB_SIDE,
     width: THUMB_SIDE,
     // position: 'absolute',
-    // left: THUMB_SIDE / -2,
+    // left: THUMB_SIDE / -2,[]
   },
 })``
 

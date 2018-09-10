@@ -1,28 +1,53 @@
 //@flow
 import React from 'react'
-import styled from 'styled-components'
+import styled, { withTheme } from 'styled-components'
 import { Platform, StyleSheet, Text, View } from 'react-native'
 import type { Props } from './types'
+
+import songs from '../../songs'
+
+import Header from '../../components/molecules/SongScreenHeader'
+import SongActions from '../../components/molecules/SongActions'
 
 const Screen = styled.View`
   flex: 1;
   align-items: center;
-  justify-content: center;
-  background: ${p => p.theme.palette.primary.background};
-  color: ${p => p.theme.palette.primary.contrastText};
+  background: ${p => p.theme.palette.background.main};
+  color: ${p => p.theme.palette.background.contrastText};
 `
 
-export default class HomeScreen extends React.Component<Props> {
-  static navigationOptions = ({ navigation }: Props) => ({
-    title: navigation.getParam('song'),
-    header: null,
-  })
+class SongScreen extends React.Component<Props> {
+  state = {
+    song: null,
+  }
+
+  static navigationOptions = ({ navigation }: Props) => {
+    const song = navigation.getParam('song')
+    return {
+      header: (
+        <Header navigation={navigation}>
+          {navigation.getParam('song').title}
+        </Header>
+      ),
+    }
+  }
+
+  componentDidMount() {
+    const song = songs.find(
+      _ => _.id === this.props.navigation.getParam('song')
+    )
+    this.setState({ song })
+  }
 
   render() {
     return (
       <Screen>
-        <Text>Song: {this.props.navigation.getParam('song')}</Text>
+        <SongActions
+          style={{ marginTop: this.props.theme.sizes.offsetMargin * 2 }}
+        />
       </Screen>
     )
   }
 }
+
+export default withTheme(SongScreen)

@@ -19,8 +19,12 @@ const Screen = styled.View`
 class LibraryScreen extends React.Component<Props> {
   state = {
     progress: 0,
-    active: 1,
-    activeSong: songs[1],
+    active: {
+      artist: 'Noname',
+      title: 'Diddy Bop',
+      id: 1,
+      active: true,
+    },
   }
 
   static navigationOptions = ({ navigation }: Props) => {
@@ -28,15 +32,6 @@ class LibraryScreen extends React.Component<Props> {
       title: navigation.getParam('otherParam'),
       header: <Header navigation={navigation}>Header</Header>,
     }
-  }
-
-  static getDerivedStateFromProps(props, state) {
-    if (props.active !== state.active) {
-      return {
-        activeSong: songs.find(_ => _.id === props.active),
-      }
-    }
-    return state
   }
 
   onProgressChange = val => this.setState({ progress: val })
@@ -51,7 +46,7 @@ class LibraryScreen extends React.Component<Props> {
               song={song}
               onPress={() =>
                 this.props.navigation.navigate('SongScreen', {
-                  song,
+                  song: this.state.active,
                 })
               }
               progress={this.state.progress}
@@ -60,16 +55,16 @@ class LibraryScreen extends React.Component<Props> {
                 marginTop:
                   i === 0 ? this.props.theme.sizes.offsetMargin * 2 : 0,
               }}
-              active={this.state.active === song.id}
+              active={this.state.active.id === song.id}
             />
           ))}
         </SongsList>
         <NowPlaying
           progress={this.state.progress}
-          song={songs.find(_ => _.id === this.state.active)}
+          song={this.state.active}
           onExpand={() =>
             this.props.navigation.navigate('SongScreen', {
-              song: this.state.activeSong,
+              song: this.state.active,
             })
           }
         />
